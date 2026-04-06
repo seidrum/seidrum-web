@@ -43,6 +43,9 @@ function App() {
 
       {/* Hero */}
       <div className="relative z-10 flex flex-col items-center px-6 max-w-4xl">
+        {/* Logo icon */}
+        <img src="/seidrum-icon.svg" alt="" className="animate-fade-up mb-6 h-20 w-20 sm:h-24 sm:w-24 drop-shadow-[0_0_24px_rgba(129,140,248,0.3)]" />
+
         {/* Pronunciation + identity */}
         <div className="animate-fade-up mb-4 flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3">
           <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-white/25">
