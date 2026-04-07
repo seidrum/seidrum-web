@@ -5,78 +5,120 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: #06020f;
-  overflow: hidden;
 }
 
+/* ------------------------------------------------------------------ */
+/* Entrance animations                                                */
+/* ------------------------------------------------------------------ */
+
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes draw-in {
-  from {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
+  from { opacity: 0; transform: scaleX(0); }
+  to   { opacity: 1; transform: scaleX(1); }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.8s ease-out both;
-}
-
-.animate-fade-up-delay-1 {
-  animation: fade-up 0.8s ease-out 0.15s both;
-}
-
-.animate-fade-up-delay-2 {
-  animation: fade-up 0.8s ease-out 0.3s both;
-}
-
-.animate-fade-up-delay-3 {
-  animation: fade-up 0.8s ease-out 0.45s both;
-}
-
-.animate-fade-up-delay-4 {
-  animation: fade-up 0.8s ease-out 0.6s both;
-}
+.animate-fade-up          { animation: fade-up 0.8s ease-out both; }
+.animate-fade-up-delay-1  { animation: fade-up 0.8s ease-out 0.15s both; }
+.animate-fade-up-delay-2  { animation: fade-up 0.8s ease-out 0.3s both; }
+.animate-fade-up-delay-3  { animation: fade-up 0.8s ease-out 0.45s both; }
+.animate-fade-up-delay-4  { animation: fade-up 0.8s ease-out 0.6s both; }
 
 .animate-draw-in {
   animation: draw-in 1s ease-out 0.3s both;
   transform-origin: left;
 }
 
-/* Seidrum — soft breathing gradient */
+/* ------------------------------------------------------------------ */
+/* Seidrum heading glow                                               */
+/* ------------------------------------------------------------------ */
+
 @keyframes soft-glow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
 .seidrum-glow {
-  background: linear-gradient(
-    90deg,
-    #e2e0ff,
-    #c4b5fd,
-    #ddd6fe,
-    #a5b4fc,
-    #e2e0ff
-  );
+  background: linear-gradient(90deg, #e2e0ff, #c4b5fd, #ddd6fe, #a5b4fc, #e2e0ff);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: soft-glow 8s ease-in-out infinite;
 }
+
+/* ------------------------------------------------------------------ */
+/* Scroll-reveal (JS adds .visible)                                   */
+/* ------------------------------------------------------------------ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger children */
+.reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+
+/* ------------------------------------------------------------------ */
+/* Event flow diagram pulse                                           */
+/* ------------------------------------------------------------------ */
+
+@keyframes flow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+.flow-arrow {
+  animation: flow-pulse 2.5s ease-in-out infinite;
+}
+
+.flow-arrow:nth-child(2) { animation-delay: 0.4s; }
+.flow-arrow:nth-child(3) { animation-delay: 0.8s; }
+.flow-arrow:nth-child(4) { animation-delay: 1.2s; }
+.flow-arrow:nth-child(5) { animation-delay: 1.6s; }
+
+/* ------------------------------------------------------------------ */
+/* Code block styling                                                 */
+/* ------------------------------------------------------------------ */
+
+.code-block {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.code-block .kw  { color: #c4b5fd; }
+.code-block .str { color: #86efac; }
+.code-block .cmt { color: rgba(255, 255, 255, 0.25); }
+.code-block .fn  { color: #93c5fd; }
+.code-block .num { color: #fbbf24; }
